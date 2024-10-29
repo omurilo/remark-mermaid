@@ -1,7 +1,7 @@
 "use client";
 
 import { MutableRefObject, ReactElement, useEffect, useId, useRef, useState, useMemo } from 'react';
-import { clsx } from 'clsx';
+import clsx from 'clsx';
 import { MermaidConfig } from 'mermaid';
 import type { PluginOptions } from "./"
 
