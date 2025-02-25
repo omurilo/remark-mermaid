@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.0](https://github.com/omurilo/remark-mermaid/compare/v1.0.0...v1.1.0) (2025-02-25)
+
+
+### Features
+
+* bump react peer deps version ([33173e4](https://github.com/omurilo/remark-mermaid/commit/33173e4673d249b28a6422cd7e63a2da44201611))
+
 ## 1.0.0 (2024-10-29)
 
 
