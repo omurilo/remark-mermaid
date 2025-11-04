@@ -1,9 +1,19 @@
 "use client";
 
-import { MutableRefObject, ReactElement, useEffect, useId, useRef, useState, useMemo } from 'react';
-import clsx from 'clsx';
-import { MermaidConfig } from 'mermaid';
-import type { PluginOptions } from "./"
+import {
+  MutableRefObject,
+  ReactElement,
+  useEffect,
+  useId,
+  useRef,
+  useState,
+  useMemo,
+} from "react";
+import clsx from "clsx";
+import { MermaidConfig } from "mermaid";
+import type { PluginOptions } from "./";
+
+import "mermaid/dist/mermaid.min.css";
 
 type MermaidProps = {
   chart: string;
@@ -29,9 +39,14 @@ function useIsVisible(ref: MutableRefObject<HTMLElement>) {
   return isIntersecting;
 }
 
-export function Mermaid({ chart, className, theme }: MermaidProps): ReactElement {
+export function Mermaid({
+  chart,
+  className,
+  theme,
+  cspSafe,
+}: MermaidProps): ReactElement {
   const id = useId();
-  const [svg, setSvg] = useState('');
+  const [svg, setSvg] = useState("");
   const containerRef = useRef<HTMLDivElement>(null!);
   const isVisible = useIsVisible(containerRef);
 
@@ -48,39 +63,59 @@ export function Mermaid({ chart, className, theme }: MermaidProps): ReactElement
     };
   }, [chart, isVisible]);
 
-  const memoizedClassName = useMemo(() => clsx("mermaid", className), [className]);
+  const memoizedClassName = useMemo(
+    () => clsx("mermaid", className),
+    [className],
+  );
 
   async function renderChart() {
     const htmlElement = document.documentElement;
     const isDarkTheme =
-      htmlElement.classList.contains('dark') ||
-      htmlElement.attributes.getNamedItem('data-theme')?.value === 'dark';
+      htmlElement.classList.contains("dark") ||
+      htmlElement.attributes.getNamedItem("data-theme")?.value === "dark";
+
     const mermaidConfig: MermaidConfig = {
       startOnLoad: false,
-      securityLevel: 'loose',
-      fontFamily: 'inherit',
-      themeCSS: 'margin: 1.5rem auto 0;',
-      theme: isDarkTheme ? (theme?.dark ? 'base' : 'dark') : (theme?.light ? 'base' : 'default'),
-      themeVariables: isDarkTheme ? theme?.dark?.themeVariables : theme?.light?.themeVariables,
+      securityLevel: cspSafe ? "strict" : "loose",
+      fontFamily: "inherit",
+      themeCSS: cspSafe ? "" : "margin: 1.5rem auto 0;",
+      theme: isDarkTheme
+        ? theme?.dark
+          ? "base"
+          : "dark"
+        : theme?.light
+          ? "base"
+          : "default",
+      themeVariables: isDarkTheme
+        ? theme?.dark?.themeVariables
+        : theme?.light?.themeVariables,
     };
 
-    const { default: mermaid } = await import('mermaid');
+    const { default: mermaid } = await import("mermaid");
 
     try {
       mermaid.initialize(mermaidConfig);
       const { svg } = await mermaid.render(
-        id.replaceAll(':', ''),
-        chart.replaceAll('\\n', '\n'),
+        id.replaceAll(":", ""),
+        chart.replaceAll("\\n", "\n"),
         containerRef.current,
       );
-      setSvg(svg);
+
+      const sanitizedSvg = cspSafe
+        ? svg.replace(/<style[\s\S]*?<\/style>/g, "")
+        : svg;
+
+      setSvg(sanitizedSvg);
     } catch (error) {
-      // eslint-disable-next-line no-console -- show error
-      console.error('Error while rendering mermaid', error);
+      console.error("Error while rendering mermaid", error);
     }
   }
 
   return (
-    <div className={memoizedClassName} ref={containerRef} dangerouslySetInnerHTML={{ __html: svg }} />
+    <div
+      className={memoizedClassName}
+      ref={containerRef}
+      dangerouslySetInnerHTML={{ __html: svg }}
+    />
   );
-};
+}
