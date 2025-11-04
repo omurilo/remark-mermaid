@@ -5,7 +5,7 @@
 
 ### Bug Fixes
 
-* add csp sage option ([e5ebd7e](https://github.com/omurilo/remark-mermaid/commit/e5ebd7e15b527fb9d69438fa49eed23b201c3d57))
+* add csp safe option ([e5ebd7e](https://github.com/omurilo/remark-mermaid/commit/e5ebd7e15b527fb9d69438fa49eed23b201c3d57))
 
 ## [1.1.0](https://github.com/omurilo/remark-mermaid/compare/v1.0.0...v1.1.0) (2025-02-25)
 
