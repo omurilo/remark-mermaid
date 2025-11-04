@@ -1,6 +1,6 @@
 {
   "name": "@omurilo/remark-mermaid",
-  "version": "1.1.1",
+  "version": "1.1.5",
   "type": "module",
   "description": "Remark plugin for replacing ```mermaid code blocks with react `<Mermaid />` component with props like className and theme with themeVariables property",
   "repository": {
@@ -9,14 +9,13 @@
   "author": "Murilo Alves <hi@omurilo.dev> (https://github.com/omurilo)",
   "license": "MIT",
   "exports": {
-    "./package.json": "./package.json",
     ".": {
-      "types": "./dist/index.d.ts",
-      "default": "./dist/index.js"
+      "require": "./dist/index.cjs",
+      "import": "./dist/index.js"
     },
-    "./*": {
-      "types": "./dist/*.d.ts",
-      "default": "./dist/*.js"
+    "./Mermaid": {
+      "import": "./dist/Mermaid.js",
+      "require": "./dist/Mermaid.cjs"
     }
   },
   "types": "./dist/index.d.ts",

@@ -1,0 +1,7 @@
+src/
+node_modules/
+tsup.config.ts
+tsconfig.json
+*.log
+*.map
+*.test.*

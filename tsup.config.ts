@@ -1,11 +1,12 @@
-import { defineConfig } from 'tsup';
+import { defineConfig } from "tsup";
 
-export default defineConfig([
-  {
-    format: 'esm',
-    entry: ['src/**/*.{ts,tsx}', '!**/*.test.{ts,tsx}'],
-    bundle: false,
-    dts: true,
-    clean: true,
-  },
-]);
+export default defineConfig({
+  entry: ["src/index.ts", "src/Mermaid.tsx"],
+  format: ["cjs", "esm"],
+  target: "node18",
+  dts: true,
+  sourcemap: true,
+  clean: true,
+  minify: false,
+  outDir: "dist",
+});

@@ -11,9 +11,7 @@ import {
 } from "react";
 import clsx from "clsx";
 import { MermaidConfig } from "mermaid";
-import type { PluginOptions } from "./";
-
-import "mermaid/dist/mermaid.min.css";
+import type { PluginOptions } from "./types.ts";
 
 type MermaidProps = {
   chart: string;
@@ -43,7 +41,7 @@ export function Mermaid({
   chart,
   className,
   theme,
-  cspSafe,
+  cspSafe = false,
 }: MermaidProps): ReactElement {
   const id = useId();
   const [svg, setSvg] = useState("");

@@ -1,19 +1,7 @@
 import { Code, Root } from "mdast";
 import { Plugin } from "unified";
 import { visit } from "unist-util-visit";
-
-type Theme = {
-  themeVariables: Record<string, string | Record<string, string>>;
-};
-
-export interface PluginOptions {
-  className?: string;
-  theme?: {
-    light?: Theme;
-    dark?: Theme;
-  };
-  cspSafe?: boolean;
-}
+import type { PluginOptions } from "./types.ts";
 
 const COMPONENT_NAME = "Mermaid";
 
