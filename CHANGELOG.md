@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.2.0](https://github.com/omurilo/remark-mermaid/compare/v1.1.1...v1.2.0) (2025-11-04)
+
+
+### Features
+
+* bump react peer deps version ([c42168d](https://github.com/omurilo/remark-mermaid/commit/c42168d47a6c347f04d386a7ea34530a1742185f))
+* first version of remark-mermaid this version is inspired on @theguild/remark-mermaid, a bunch of new features is added to it. ([664d4e8](https://github.com/omurilo/remark-mermaid/commit/664d4e802e7eafc1c5493f67b7d29d50d89b6213))
+
+
+### Bug Fixes
+
+* add csp sage option ([e5ebd7e](https://github.com/omurilo/remark-mermaid/commit/e5ebd7e15b527fb9d69438fa49eed23b201c3d57))
+
 ## [1.1.1](https://github.com/omurilo/remark-mermaid/compare/v1.1.0...v1.1.1) (2025-11-04)
 
 
